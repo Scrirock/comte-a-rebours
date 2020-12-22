@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Outline&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%;
+}
+
+body{
+    width: 100%;
+    font-size: 2rem;
+}
+
+div{
+    width: 100%;
+}
+
+p{
+    font-size: 8rem;
+    line-height: 8rem;
+    color: #76529a;
+    font-family: 'Russo One', sans-serif;
+}
+
+.info{
+    font-family: 'Bungee Outline', cursive;
+    color: #7777b1;
+    font-size: 5rem;
+    font-weight: bold;
+}
+
+#container{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    width: 100%;
+}
+
+.case{
+    border: 5px solid #756cb6;
+    border-radius: 2rem;
+    margin: 15px;
+    box-shadow: 15px 15px 15px #444469;
+}
