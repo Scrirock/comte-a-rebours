@@ -1,37 +1,37 @@
-let Decompte = function (jours, heures, minutes, secondes){
-    this.jours = jours;
-    this.heures = heures;
-    this.minutes = minutes;
-    this.secondes = secondes;
+document.getElementById("create").addEventListener("click", () =>{
+    let secondde = document.getElementById("secondes").value;
+    let minute = document.getElementById("minutes").value;
+    let heure = document.getElementById("heures").value;
+    let jours = document.getElementById("jours").value;
 
-    document.getElementById("nbrSecondes").innerHTML = this.secondes;
-    document.getElementById("nbrMinutes").innerHTML = this.minutes;
-    document.getElementById("nbrHeures").innerHTML = this.heures;
-    document.getElementById("nbrJours").innerHTML = this.jours;
 
-    this.start = function (){
-        let decompte = setInterval(()=>{
-            if (secondes <= 0 && minutes !== 0) {
-                secondes = 60;
-                minutes--;
-                document.getElementById("nbrMinutes").innerHTML = minutes;
-            }
-            else if (minutes <= 0 && secondes === 0 && heures !== 0) {
-                minutes = 60;
-                heures--;
-                document.getElementById("nbrHeures").innerHTML = heures;
-            }
-            else if (heures <= 0 && minutes <= 0 && jours !== 0){
-                jours--;
-                heures = 24;
-                document.getElementById("nbrJours").innerHTML = jours;
-            }
-            else if (secondes === 0 && minutes === 0 && heures === 0 && jours === 0){
-                clearInterval(decompte);
-            }
-            secondes--;
-            document.getElementById("nbrSecondes").innerHTML = secondes;
-        }, 1000)}
+    let nbrSec = parseInt(parseInt(secondde) + parseInt(minute*60) + parseInt(heure*3600) + parseInt(jours*3600*24));
+
+    createElement();
+    Rebours(nbrSec);
+});
+
+let Rebours = function (sec){
+    this.secondeTotal = sec;
+
+    this.compteRebour = setInterval(()=>{
+        this.secondeTotal --;
+
+        this.resteJours = Math.floor(this.secondeTotal / 86400);
+        this.resteHeures = Math.floor((this.secondeTotal - (this.resteJours * 86400)) / 3600 );
+        this.resteMinutes = Math.floor((this.secondeTotal - (this.resteJours * 86400) - (this.resteHeures * 3600)) / 60);
+        this.resteSecondes = Math.floor(this.secondeTotal - (this.resteJours * 86400) - (this.resteHeures * 3600) - (this.resteMinutes * 60));
+
+        document.getElementById("nbrJours").innerHTML = this.resteJours;
+        document.getElementById("nbrHeures").innerHTML = this.resteHeures;
+        document.getElementById("nbrMinutes").innerHTML = this.resteMinutes;
+        document.getElementById("nbrSecondes").innerHTML = this.resteSecondes;
+
+        if (this.secondeTotal === 0){
+            clearInterval(this.compteRebour);
+        }
+    }, 1000)
+
 }
 
 let createElement = function (){
@@ -82,15 +82,6 @@ let createElement = function (){
     let nbrSecondes = document.createElement("p");
     nbrSecondes.id = "nbrSecondes"
     divSeconde.append(nbrSecondes);
+
+    document.getElementById("paf").style.display = "none";
 }
-
-document.getElementById("create").addEventListener("click", ()=>{
-    createElement();
-    let jour = document.getElementById("jours").value;
-    let heure = document.getElementById("heures").value;
-    let minute = document.getElementById("minutes").value;
-    let seconde = document.getElementById("secondes").value;
-
-    let decomtpe = new Decompte(jour, heure, minute, seconde);
-    decomtpe.start();
-});
